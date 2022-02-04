@@ -88,3 +88,19 @@ const updateScore = (playerChoice) => {
   }
 };
 ```
+
+## Reset Game Board
+```javascript
+// Reset Score & playerChoice/compterChoice
+const resetAll = () => {
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  playerChoiceEl.textContent = "";
+  computerChoiceEl.textContent = "";
+  resultText.textContent = "";
+  resetSelected();
+};
+window.resetAll = resetAll;
+```

@@ -17,7 +17,12 @@ const computerScissors = document.getElementById("computerScissors");
 const computerLizard = document.getElementById("computerLizard");
 const computerSpock = document.getElementById("computerSpock");
 
+const resetIcon = document.querySelector(".reset-icon");
+
 const allGameIcons = document.querySelectorAll(".far");
+
+playerChoiceEl.textContent = " --- Choice";
+computerChoiceEl.textContent = " --- Choice";
 
 const choices = {
   rock: { name: "Rock", defeats: ["scissors", "lizard"] },
@@ -29,6 +34,7 @@ const choices = {
 
 let computerChoice = "";
 let playerScoreNumber = "";
+let computerScoreNumber = "";
 
 // Reset all 'selected' icons
 const resetSelected = () => {
@@ -36,6 +42,19 @@ const resetSelected = () => {
     icon.classList.remove("selected");
   });
 };
+
+// Reset Score & playerChoice/compterChoice
+const resetAll = () => {
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  playerChoiceEl.textContent = "";
+  computerChoiceEl.textContent = "";
+  resultText.textContent = "";
+  resetSelected();
+};
+window.resetAll = resetAll;
 
 // Randome Computer choice
 const computerRandomChoice = () => {
@@ -95,8 +114,8 @@ const updateScore = (playerChoice) => {
       playerScoreEl.textContent = playerScoreNumber;
     } else {
       resultText.textContent = "You Lost!";
-      playerScoreNumber++;
-      computerScoreEl.textContent = playerScoreNumber;
+      computerScoreNumber++;
+      computerScoreEl.textContent = computerScoreNumber;
     }
   }
 };
@@ -139,3 +158,6 @@ const select = (playerChoice) => {
   }
 };
 window.select = select; // Set select on window object
+
+// On Load
+resetAll();
