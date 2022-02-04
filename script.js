@@ -23,9 +23,12 @@ const choices = {
   rock: { name: "Rock", defeats: ["scissors", "lizard"] },
   paper: { name: "Paper", defeats: ["rock", "spock"] },
   scissors: { name: "Scissors", defeats: ["paper", "lizard"] },
-  lizarrd: { name: "Lizard", defeats: ["paper", "spock"] },
+  lizard: { name: "Lizard", defeats: ["paper", "spock"] },
   spock: { name: "Spock", defeats: ["scissors", "rock"] },
 };
+
+let computerChoice = "";
+let playerScoreNumber = "";
 
 // Reset all 'selected' icons
 const resetSelected = () => {
@@ -34,9 +37,81 @@ const resetSelected = () => {
   });
 };
 
+// Randome Computer choice
+const computerRandomChoice = () => {
+  const computerChoiceNumber = Math.random();
+  if (computerChoiceNumber < 0.2) {
+    computerChoice = "rock";
+  } else if (computerChoiceNumber <= 0.4) {
+    computerChoice = "paper";
+  } else if (computerChoiceNumber <= 0.6) {
+    computerChoice = "scissors";
+  } else if (computerChoiceNumber <= 0.8) {
+    computerChoice = "lizard";
+  } else {
+    computerChoice = "spock";
+  }
+};
+
+// Add 'selected' styling & computerChoice
+const displayComputerChoice = () => {
+  switch (computerChoice) {
+    case "rock":
+      computerRock.classList.add("selected");
+      computerChoiceEl.textContent = " --- Rock";
+      break;
+    case "paper":
+      computerPaper.classList.add("selected");
+      computerChoiceEl.textContent = " --- Paper";
+      break;
+    case "scissors":
+      computerScissors.classList.add("selected");
+      computerChoiceEl.textContent = " --- Scissors";
+      break;
+    case "lizard":
+      computerLizard.classList.add("selected");
+      computerChoiceEl.textContent = " --- Lizard";
+      break;
+    case "spock":
+      computerSpock.classList.add("selected");
+      computerChoiceEl.textContent = " --- Spock";
+      break;
+    default:
+      break;
+  }
+};
+
+// Check result, increase score, update resultText
+const updateScore = (playerChoice) => {
+  console.log(playerChoice, computerChoice);
+  if (playerChoice === computerChoice) {
+    resultText.textContent = "It's a tie";
+  } else {
+    const choice = choices[playerChoice];
+    console.log(choice.defeats.indexOf(computerChoice));
+    if (choice.defeats.indexOf(computerChoice) > -1) {
+      resultText.textContent = "You Won!";
+      playerScoreNumber++;
+      playerScoreEl.textContent = playerScoreNumber;
+    } else {
+      resultText.textContent = "You Lost!";
+      playerScoreNumber++;
+      computerScoreEl.textContent = playerScoreNumber;
+    }
+  }
+};
+
+// Call functions to process turn
+const checkResults = (playerChoice) => {
+  resetSelected();
+  computerRandomChoice();
+  displayComputerChoice();
+  updateScore(playerChoice);
+};
+
 // Passing player selection value and styling icons
 const select = (playerChoice) => {
-  resetSelected();
+  checkResults(playerChoice);
   // Add 'selected' styling & playerChoice
   switch (playerChoice) {
     case "rock":
