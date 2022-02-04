@@ -104,3 +104,8 @@ const resetAll = () => {
 };
 window.resetAll = resetAll;
 ```
+## Using Import and Dynamic script loading
+```javascript
+import { startConfetti, stopConfetti, removeConfetti } from "./confeti.js";
+<script src="script.js" type="module"></script>
+```
