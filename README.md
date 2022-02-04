@@ -108,4 +108,10 @@ window.resetAll = resetAll;
 ```javascript
 import { startConfetti, stopConfetti, removeConfetti } from "./confeti.js";
 <script src="script.js" type="module"></script>
+
+// Using Dynamic script loading
+ import("./confeti.js").then((module) => {
+    module.stopConfetti();
+    module.removeConfetti();
+  });
 ```
